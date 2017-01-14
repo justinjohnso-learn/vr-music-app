@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hello, World! - A-Frame</title>
+    <meta name="description" content="Hello, World! - A-Frame">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <script src="https://aframe.io/releases/0.4.0/aframe.min.js"></script>
+    <script src="components/build.js"></script>
+    <script src="https://unpkg.com/aframe-audioanalyser-component@3.0.0/dist/aframe-audioanalyser-component.min.js"></script>
+    <!--<script src="https://rawgit.com/ngokevin/kframe/master/components/entity-generator/dist/aframe-entity-generator-component.min.js"></script>-->
+    <!--<script src="components/aframe-audioanalyser-component.js"></script>-->
+    <!--<script src="components/aframe-entity-generator-component.js"></script>-->
+    <script src="components/scale-y-color.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <!--<a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>-->
+      <!--<a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>-->
+      <!--<a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>-->
+      <!--<a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>-->
+      <!--<a-sky color="#ECECEC"></a-sky>-->
+      
+      <a-assets>
+        <a-mixin id="bar"
+          geometry="primitive: box"
+          material="color: black"
+          scale-y-color="from: 10 5 10; to: 180 255 180; maxScale: 15"
+        ></a-mixin>
+        <audio id="song" autoplay loop src="castle.mp3"></audio>
+      </a-assets>
+
+      <a-entity
+        audioanalyser="src: #song; smoothingTimeConstant: 0.9"
+        audioanalyser-levels-scale="max: 50; multiplier: 0.04"
+        entity-generator="mixin: bar; num: 256"
+        layout="type: circle; radius: 10"
+        rotation="0 180 0"
+      ></a-entity>
+
+      <a-light type="ambient" color="#222"></a-light>
+      <a-light type="point" position="0 1 0" intensity="2"></a-light>
+      <a-circle color="#333" opacity="0.8" rotation="-90 0 0" radius="12"
+        roughness="1"></a-circle>
+      <a-sky color="#222"></a-sky>
+
+    </a-scene>
+  </body>
+</html>
