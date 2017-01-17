@@ -9,12 +9,14 @@
     <script src="https://rawgit.com/donmccurdy/aframe-proxy-controls/master/dist/aframe-proxy-controls.min.js"></script>
     <script src="https://rawgit.com/donmccurdy/aframe-gamepad-controls/master/dist/aframe-gamepad-controls.min.js"></script>
 
+    <script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script>
+
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="components/main.js" type="text/javascript" charset="utf-8"></script>
 
   </head>
   <body>
-    <a-scene
+    <a-scene proxy-controls
     >
     <a-assets>
       <audio id="song" loop src="castle.mp3"></audio>
@@ -25,8 +27,6 @@
                 look-controls
                 gamepad-controls="flyEnabled: true"
                 id="camera"
-                sound="src: url(castle.mp3);
-                       on: gamepadbuttondown:0"
       >
       </a-entity>
 
