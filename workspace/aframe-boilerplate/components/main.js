@@ -7,11 +7,17 @@ $(document).ready(function() {
     console.log(e.detail.pairCode);
   });
 
-  //const camera = $('#camera')
+  const camera = $('#camera')
   //camera.addEventListener('gamepadbuttondown', function (e) {
-      //console.log('Button "%d" has been pressed.', e.index);
+    //console.log('Button "%d" has been pressed.', e.index);
   //});
+  
+  $(camera).on('gamepadbuttondown', function(e){
+    console.log(e.index)
+    console.log("I hate cucumbers")
+  })
 
 });
+
 
 

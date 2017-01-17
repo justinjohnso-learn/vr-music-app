@@ -14,17 +14,19 @@
 
   </head>
   <body>
-    <a-scene proxy-controls
+    <a-scene
     >
     <a-assets>
       <audio id="song" loop src="castle.mp3"></audio>
     </a-assets>
 
       <a-entity camera
-                gamepad-controls
+                position="0 2 3"
+                look-controls
+                gamepad-controls="flyEnabled: true"
                 id="camera"
-                sound="src: castle.mp3;
-                       on: gamepadbuttondown:12"
+                sound="src: url(castle.mp3);
+                       on: gamepadbuttondown:0"
       >
       </a-entity>
 
