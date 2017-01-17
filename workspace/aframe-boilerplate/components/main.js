@@ -9,74 +9,86 @@ function playSound () {
   createjs.Sound.play(soundID);
 }
 
-function gampadListeners () {
-  const gamepadX = $('#camera').on('gamepadbuttondown:0', function () {
-    cursor.dataset.button = "A"
-    cursor.components.cursor.onMouseDown();
-    cursor.components.cursor.onMouseUp();
-    //console.log("A")
-  });
+//function stopSound () {
+  //createjs.Sound.stop(soundID);
+//}
 
-  const gamepadRT = $('#camera').on('gamepadbuttondown:7', function () {
-    cursor.dataset.button = "RT"
-    cursor.components.cursor.onMouseDown();
-    cursor.components.cursor.onMouseUp();
-    //console.log("RT")
-  });
+//function loopSound() {
+  //createjs.Sound.play(soundID, {loop: -1});
+//}
 
-  const gamepadB = $('#camera').on('gamepadbuttondown:1', function () {
-    cursor.dataset.button = "B"
-    cursor.components.cursor.onMouseDown();
-    cursor.components.cursor.onMouseUp();
-    //console.log("B")
-  });
-}
+//function gampadListeners () {
+  //const gamepadX = $('#camera').on('gamepadbuttondown:0', function () {
+    //cursor.dataset.button = "A"
+    //cursor.components.cursor.onMouseDown();
+    //cursor.components.cursor.onMouseUp();
+    ////console.log("A")
+  //});
+
+  //const gamepadRT = $('#camera').on('gamepadbuttondown:7', function () {
+    //cursor.dataset.button = "RT"
+    //cursor.components.cursor.onMouseDown();
+    //cursor.components.cursor.onMouseUp();
+    ////console.log("RT")
+  //});
+
+  //const gamepadB = $('#camera').on('gamepadbuttondown:1', function () {
+    //cursor.dataset.button = "B"
+    //cursor.components.cursor.onMouseDown();
+    //cursor.components.cursor.onMouseUp();
+    ////console.log("B")
+  //});
+//}
 
 function setEventListeners () {
   const scene = document.querySelector('a-scene')
   scene.addEventListener('proxycontrols.paircode', function (e) {
     console.log(e.detail.pairCode);
   });
+
   const camera = $('#camera')
   $(camera).on('gamepadbuttondown', function(){
-    //playSound()
+    playSound()
     //console.log("BANANA")
   })
 
   // Component to change to random color on click.
-  AFRAME.registerComponent('cursor-listener', {
-    init: function () {
-      //let COLORS = ['red', 'green', 'blue'];
-      let buttonColor = "purple"
-      $(this.el).on('click', function (evt) {
-        let cursorData  = evt.originalEvent.detail.cursorEl.dataset.button
-        if (cursorData === "A") {
-          buttonColor = "blue"
-        } else if (cursorData === "B") {
-          buttonColor = "green"
-        } else if (cursorData === "RT") {
-          buttonColor = "red"
-        }
-        //let randomIndex = Math.floor(Math.random() * COLORS.length);
-        this.setAttribute('material', 'color', buttonColor);
-        //console.log(clicker)
-      });
-    }
-  });
-
-  //AFRAME.registerComponent('#box', {
+  //AFRAME.registerComponent('cursor-listener', {
     //init: function () {
-      //this.el.addEventListener('click', function(){
-        //console.log("toast")
-      //})
+      //let buttonColor = "purple"
+      //$(this.el).on('click', function (evt) {
+        //let cursorData  = evt.originalEvent.detail.cursorEl.dataset.button
+        //if (cursorData === "A") {
+          //buttonColor = "blue"
+        //} else if (cursorData === "B") {
+          //buttonColor = "green"
+        //} else if (cursorData === "RT") {
+          //buttonColor = "red"
+        //}
+        //this.setAttribute('material', 'color', buttonColor);
+      //});
     //}
-  //})
-  
-  //camera.addEventListener('gamepadbuttondown', function (e) {
-    //console.log('Button "%d" has been pressed.', e.index);
+  //});
+
+  //AFRAME.registerComponent('cursor-listener', {
+    //init: function () {
+      //$(this.el).on('click', function (evt) {
+        //let cursorData  = evt.originalEvent.detail.cursorEl.dataset.button
+        //if (cursorData === "A") {
+          //playSound("castle")
+        //}
+        //if (cursorData === "B") {
+          //stopSound("castle")
+          //console.log("it works?")
+        //}
+        //if (cursorData === "RT") {
+          //loopSound("castle")
+        //}
+      //});
+    //}
   //});
   
-  gampadListeners();
+  //gampadListeners();
 
   console.log("event listeners set!")
 }
