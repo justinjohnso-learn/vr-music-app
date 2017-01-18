@@ -1,119 +1,108 @@
-var soundID = "castle";
-
+// Handle audio
+// DON'T FORGET TO TAP ON MOBILE SCREEN TO UNLOCK AUDIO
+//
 function loadSound () {
-  createjs.Sound.registerSound("castle.mp3", soundID);
-  //createjs.Sound.addEventListener("fileload", handleFileLoad);
-  //function handleFileLoad(event) {
-    //console.log("Preloaded:", event.src);
-  //}
+  createjs.Sound.registerSound("castle.mp3", "castle");
+  createjs.Sound.registerSound("spine.mp3", "spine");
+  createjs.Sound.registerSound("tomes.mp3", "tomes");
+  createjs.Sound.addEventListener("fileload", handleFileLoad);
+  function handleFileLoad(event) {
+    console.log("Preloaded:", event.src);
+  }
 }
 
-function playSound () {
+var soundID = "";
+function playSound (soundID) {
   createjs.Sound.play(soundID);
 }
 
-function stopSound () {
+function stopSound (soundID) {
   createjs.Sound.stop(soundID);
 }
 
-function loopSound() {
+function loopSound (soundID) {
   createjs.Sound.play(soundID, {loop: -1});
 }
 
-function gampadListeners () {
-  var gamepadX = $('#camera').on('gamepadbuttondown:0', function () {
-    cursor.emit('gamepadA', {target: 'cursor-listener'}, false)
-    //cursor.dataset.button = "A"
-    //playSound()
-    //cursor.components.cursor.onMouseDown();
-    //cursor.components.cursor.onMouseUp();
+// Handle gamepad click functions
+//
+function gamepadListeners () {
+  $('#camera').on('gamepadbuttondown:0', function () {
+    var intersectedEl = cursor.components.cursor.intersectedEl
+    var audio = intersectedEl.components['audio']
+    cursor.emit('gamepadA', { cursorTarget: intersectedEl,
+                              buttonColor: 'green',
+                              audio: audio
+                              }, true)
     console.log("A")
   });
 
-  var gamepadRT = $('#camera').on('gamepadbuttondown:7', function () {
-    cursor.emit('gamepadRT', {target: 'cursor-listener'}, false)
-    //cursor.dataset.button = "RT"
-    //loopSound()
-    //cursor.components.cursor.onMouseDown();
-    //cursor.components.cursor.onMouseUp();
+  $('#camera').on('gamepadbuttondown:7', function () {
+    var intersectedEl = cursor.components.cursor.intersectedEl
+    var audio = intersectedEl.components['audio']
+    cursor.emit('gamepadRT', { cursorTarget: intersectedEl,
+                              buttonColor: 'red',
+                              audio: audio
+                              }, true)
     console.log("RT")
   });
 
-  var gamepadB = $('#camera').on('gamepadbuttondown:1', function () {
+  $('#camera').on('gamepadbuttondown:1', function () {
     var intersectedEl = cursor.components.cursor.intersectedEl
-    var buttonColor = cursor.components.cursor.intersectedEl.components['cursor-listener'].data.buttonColor
+    var audio = intersectedEl.components['audio']
     cursor.emit('gamepadB', { cursorTarget: intersectedEl,
-                              buttonColor: 'blue'
+                              buttonColor: 'blue',
+                              audio: audio
                               }, true)
-      //stopSound()
-      console.log("B")
+    console.log("B")
   });
 }
 
+// Set event listeners
+//
 function setEventListeners () {
   var scene = document.querySelector('a-scene')
   scene.addEventListener('proxycontrols.paircode', function (e) {
     console.log(e.detail.pairCode);
   });
 
-  //var camera = $('#camera')
-  //$(camera).on('gamepadbuttondown', function(){
-    //playSound()
-    //console.log("BANANA")
-  //})
-  
-  scene.addEventListener('gamepadB', function(e){
-    console.log(e, e.detail)
+  scene.addEventListener('gamepadA', function(e){
     var cursorTarget = e.detail.cursorTarget
-    var targetData = e.detail.cursorTarget.components['cursor-listener'].data
     var buttonColor = e.detail.buttonColor
+    var audio = e.detail.audio.data
+    playSound(audio)
     cursorTarget.setAttribute('material', 'color', buttonColor);
+    //console.log(e, e.detail)
   })
 
-  // Component to change to random color on click.
-  AFRAME.registerComponent('cursor-listener', {
-    schema: {
-      buttonColor: {type: 'string'}
-    },
-    update: function () {
-      var data = this.data;  // Component property values.
-      var el = this.el;  // Reference to the component's entity.
-      el.addEventListener('gamepadB', function (event) {
-        console.log(event)
-        //var cursorData  = cursor.dataset.button
-        //if (cursorData === "A") {
-          //buttonColor = "blue"
-        //} else if (cursorData === "B") {
-          //buttonColor = "green"
-        //} else if (cursorData === "RT") {
-          //buttonColor = "red"
-        //}
-        this.setAttribute('material', 'color', this.buttonColor);
-      });
-    }
-  });
+  scene.addEventListener('gamepadRT', function(e){
+    var cursorTarget = e.detail.cursorTarget
+    var buttonColor = e.detail.buttonColor
+    var audio = e.detail.audio.data
+    loopSound(audio)
+    cursorTarget.setAttribute('material', 'color', buttonColor);
+    //console.log(e, e.detail)
+  })
 
-  //AFRAME.registerComponent('cursor-listener', {
-    //init: function () {
-      //$(this.el).on('click', function (evt) {
-        //var cursorData  = evt.originalEvent.detail.cursorEl.dataset.button
-        //if (cursorData === "A") {
-          //playSound()
-        //}
-        //if (cursorData === "B") {
-          //stopSound()
-        //}
-        //if (cursorData === "RT") {
-          //loopSound()
-        //}
-      //});
-    //}
-  //});
-  
-  gampadListeners();
+  scene.addEventListener('gamepadB', function(e){
+    var cursorTarget = e.detail.cursorTarget
+    var buttonColor = e.detail.buttonColor
+    var audio = e.detail.audio.data
+    stopSound(audio)
+    cursorTarget.setAttribute('material', 'color', buttonColor);
+    //console.log(e, e.detail)
+  })
 
+  gamepadListeners();
   console.log("event listeners set!")
 }
+
+// Init entity audio component
+//
+AFRAME.registerComponent('audio', {
+  schema: 
+    {type: 'string'}
+});
 
 $(document).ready(function() {
   loadSound();
