@@ -19,18 +19,16 @@
     <a-scene proxy-controls
     >
     <a-assets>
-      <!--<audio id="song" loop src="castle.mp3"></audio>-->
+      <audio id="castle" src="castle.mp3"></audio>
     </a-assets>
 
       <a-entity camera
                 position="0 2 3"
                 look-controls
                 gamepad-controls="flyEnabled: true"
-                id="camera"
-      >
-        <a-cursor id="cursor"
-                  event="gamepadB"
-        ></a-cursor>
+                id="camera">
+        <a-cursor id="cursor">
+        </a-cursor>
       </a-entity>
 
       <a-box      audio ="spine"  position ="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
