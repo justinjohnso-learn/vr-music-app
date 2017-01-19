@@ -7,22 +7,28 @@ function loadSound () {
   createjs.Sound.registerSound("tomes.mp3", "tomes");
   createjs.Sound.addEventListener("fileload", handleFileLoad);
   function handleFileLoad(event) {
+    var scene = document.querySelector('a-scene')
+    var audioEntity = document.createElement('a-entity')
+    audioEntity.id = event.id;
+    scene.appendChild(audioEntity);
+    console.log(audioEntity)
     console.log("Preloaded:", event.src);
+    //audioEntity.setAttribute('fireAudio', createjs.Sound.play(event.id))
   }
 }
 
-var soundID = "";
-function playSound (soundID) {
-  createjs.Sound.play(soundID);
-}
+//var soundID = "";
+//function playSound (soundID) {
+  //createjs.Sound.play(soundID);
+//}
 
-function stopSound (soundID) {
-  createjs.Sound.stop(soundID);
-}
+//function stopSound (soundID) {
+  //createjs.Sound.stop(soundID);
+//}
 
-function loopSound (soundID) {
-  createjs.Sound.play(soundID, {loop: -1});
-}
+//function loopSound (soundID) {
+  //createjs.Sound.play(soundID, {loop: -1});
+//}
 
 // Handle gamepad click functions
 //
