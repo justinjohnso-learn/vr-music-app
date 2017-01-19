@@ -1,34 +1,5 @@
-// Handle audio
 // DON'T FORGET TO TAP ON MOBILE SCREEN TO UNLOCK AUDIO
 //
-//function loadSound () {
-  //createjs.Sound.registerSound("castle.mp3", "castle");
-  //createjs.Sound.registerSound("spine.mp3", "spine");
-  //createjs.Sound.registerSound("tomes.mp3", "tomes");
-  //createjs.Sound.addEventListener("fileload", handleFileLoad);
-  //function handleFileLoad(event) {
-    //var scene = document.querySelector('a-scene')
-    //var audioEntity = document.createElement('a-entity')
-    //audioEntity.id = event.id;
-    //scene.appendChild(audioEntity);
-    //console.log(audioEntity)
-    //console.log("Preloaded:", event.src);
-    ////audioEntity.setAttribute('fireAudio', createjs.Sound.play(event.id))
-  //}
-//}
-
-//var soundID = "";
-//function playSound (soundID) {
-  //createjs.Sound.play(soundID);
-//}
-
-//function stopSound (soundID) {
-  //createjs.Sound.stop(soundID);
-//}
-
-//function loopSound (soundID) {
-  //createjs.Sound.play(soundID, {loop: -1});
-//}
 
 // Handle gamepad click functions
 //
@@ -78,7 +49,7 @@ function setEventListeners () {
     var soundjs = e.detail.soundjs
     soundjs.soundjsPlay()
     cursorTarget.setAttribute('material', 'color', buttonColor);
-    //console.log(e, e.detail)
+   //console.log(e, e.detail)
   })
 
   scene.addEventListener('gamepadRT', function(e){
@@ -111,6 +82,7 @@ AFRAME.registerComponent('soundjs', {
     soundjsSrc: {type: 'string'}
   },
   init: function() {
+    var el = this.el
     var soundID = this.data.soundjsID;
     var soundSrc = this.data.soundjsSrc;
     console.log(this)
@@ -121,13 +93,13 @@ AFRAME.registerComponent('soundjs', {
     }
   },
   soundjsPlay: function(){
-    createjs.Sound.play(this.data.soundjsID)
+    var myInstance = createjs.Sound.play(this.data.soundjsID)
   },
   soundjsStop: function(){
     createjs.Sound.stop(this.data.soundjsID)
   },
   soundjsLoop: function(){
-    createjs.Sound.play(this.data.soundjsID, {loop: -1});
+    var myInstance = createjs.Sound.play(this.data.soundjsID, {loop: -1});
   }
 });
 
