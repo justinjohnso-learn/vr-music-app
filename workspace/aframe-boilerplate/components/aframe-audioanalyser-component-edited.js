@@ -55,30 +55,48 @@
 	 * Audio visualizer system for A-Frame. Share AnalyserNodes between components that share the
 	 * the `src`.
 	 */
+
+  //this.sceneEl.addEventListener('didAThing', eventHandler)
+      //function eventHandler(eventData){
+        //var newAnalyser = thingDoer(eventData, analyserData, initData)
+        //this.eventData = newAnalyser
+      //}
+      //return this.eventData
+
+  //function thingDoer(eventData, analyserData, initData) {
+  //}
+
 	AFRAME.registerSystem('audioanalyser', {
 	  init: function () {
-	    this.analysers = {};
+      this.analysers = {};
+      this.eventData = {};
 	  },
+    
+    getOrCreateAnalyser: function(analyserData){
+      console.log(analyserData)
+      var eventData = analyserData.src
+      if (!context) { context = eventData.context; }
+      //var analysers = this.analysers;
+      var analysers = this.analysers
+      var analyser = context.createAnalyser();
+      //var audioEl = data.src;
+      var src = eventData.src
 
-	  getOrCreateAnalyser: function (data) {
-	    if (!context) { context = new AudioContext(); }
-	    var analysers = this.analysers;
-	    var analyser = context.createAnalyser();
-	    var audioEl = data.src;
-	    var src = audioEl.getAttribute('src');
+      if (analysers[src]) { return analysers[src]; }
 
-	    if (analysers[src]) { return analysers[src]; }
+      //var source = context.createMediaElementSource(audioEl)
+      var source = eventData.source
+      source.connect(analyser);
+      analyser.connect(context.destination);
+      analyser.smoothingTimeConstant = analyserData.smoothingTimeConstant;
+      analyser.fftSize = analyserData.fftSize;
 
-	    var source = context.createMediaElementSource(audioEl)
-	    source.connect(analyser);
-	    analyser.connect(context.destination);
-	    analyser.smoothingTimeConstant = data.smoothingTimeConstant;
-	    analyser.fftSize = data.fftSize;
-
-	    // Store.
-	    analysers[src] = analyser;
-	    return analysers[src];
-	  }
+      // Store.
+      analysers[src] = analyser;
+      return analysers[src];
+      //var analyser;
+      //var initData = this.analysers
+    } 
 	});
 
 	/**
@@ -118,6 +136,7 @@
 	    }
 
 	    function init (analyser) {
+        console.log(analyser)
 	      self.analyser = analyser;
 	      self.levels = new Uint8Array(self.analyser.frequencyBinCount);
 	      self.waveform = new Uint8Array(self.analyser.fftSize);
@@ -175,7 +194,6 @@
 	    }
 	  }
 	});
-
 
 /***/ }
 /******/ ]);

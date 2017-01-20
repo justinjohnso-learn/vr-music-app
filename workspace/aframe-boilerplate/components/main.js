@@ -47,12 +47,11 @@ function setEventListeners () {
     var cursorTarget = e.detail.cursorTarget
     var buttonColor = e.detail.buttonColor
     var soundjs = e.detail.soundjs
-    //var soundjsSrc = 
-    //soundjs.soundjsPlay()
+    soundjs.soundjsPlay()
     //console.log(cursorTarget.components.soundjs.data.soundjsSrc)
     console.log (soundjs)
-    document.querySelector('#levels').setAttribute('audioanalyser', {src: soundjs.data.soundjsSrc})
-    soundjs.audioEl.play()
+    //document.querySelector('#levels').setAttribute('audioanalyser', {src: soundjs.data.soundjsSrc})
+    //soundjs.audioEl.play()
     cursorTarget.setAttribute('material', 'color', buttonColor);
    //console.log(e, e.detail)
   })
@@ -79,6 +78,7 @@ function setEventListeners () {
   console.log("event listeners set!")
 }
 
+
 // Init entity audio component
 //
 AFRAME.registerComponent('soundjs', {
@@ -89,48 +89,44 @@ AFRAME.registerComponent('soundjs', {
   init: function() {
     var audioEl;
     var el = this.el
-    //console.log(el)
     var soundID = this.data.soundjsID;
     var soundSrc = this.data.soundjsSrc;
-    //console.log(this)
+    var source = audioCtx.createBufferSource();
     createjs.Sound.registerSound(soundSrc, soundID);
     createjs.Sound.addEventListener("fileload", handleFileLoad);
     var myInstance = createjs.Sound.createInstance(soundID)
-    var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    var source;
+    //var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-     function getData() {
-      source = audioCtx.createBufferSource();
-      //console.log(audioCtx)
-      //debugger
-      request = new XMLHttpRequest();
-      request.open('GET', './castle.mp3', true);
-      request.responseType = 'arraybuffer';
-      request.onload = function() {
-        console.log(request.response)
-        var audioData = request.response;
-        audioCtx.decodeAudioData(audioData, function(buffer) {
-            //console.log(audioData)
-            myBuffer = buffer;
-            songLength = buffer.duration;
-            source.buffer = myBuffer;
-            myInstance.sourceNode = source.buffer
-            //source.playbackRate.value = playbackControl.value;
-            source.connect(audioCtx.destination);
-            //source.connect(analyser)
-            console.log(source)
-            el.emit('didAThing', {source: source,
-                                  src: soundID,
-                                  context: audioCtx}, true)
-          },
-          function(e){"Error with decoding audio data" + e.err});
-      }
-      request.send();
-    }
+    //function getData(myInstance, el, soundID, soundSrc) {
+      //request = new XMLHttpRequest();
+      //request.open('GET', soundSrc, true);
+      //request.responseType = 'arraybuffer';
+      //request.onload = function() {
+        //console.log(request.response)
+        //var audioData = request.response;
+        //audioCtx.decodeAudioData(audioData, function(buffer) {
+            ////console.log(audioData)
+            //myBuffer = buffer;
+            //songLength = buffer.duration;
+            //source.buffer = myBuffer;
+            //myInstance.sourceNode = source.buffer
+            ////source.playbackRate.value = playbackControl.value;
+            //source.connect(audioCtx.destination);
+            ////source.connect(analyser)
+            //console.log(source)
+            //el.emit('didAThing', {source: source,
+                                  //src: soundID,
+                                  //context: audioCtx}, true)
+          //},
+          //function(e){"Error with decoding audio data" + e.err});
+      //}
+      //request.send();
+    //}
+
 
     function handleFileLoad(event) {
+      //getData(myInstance, el, soundID, soundSrc);
       //audioEl.src = soundSrc
-      getData();
       console.log("Preloaded:", event.src);
     }
       //myInstance.sourceNode = soundSrc
@@ -143,6 +139,7 @@ AFRAME.registerComponent('soundjs', {
       //el.appendChild(audioEl);
       el.setAttribute('audioanalyser', {src: myInstance});
   },
+
   soundjsPlay: function(){
     createjs.Sound.play(this.data.soundjsID)
   },
