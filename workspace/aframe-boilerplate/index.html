@@ -12,21 +12,13 @@
 
     <!--aframe base-->
       <script src="https://aframe.io/releases/0.4.0/aframe.min.js"></script>
-      <!--<script src="https://aframe.io/releases/0.3.2/aframe.min.js"></script>-->
 
     <!--proxy-controls, gamepad-controls-->
       <script src="https://rawgit.com/donmccurdy/aframe-proxy-controls/master/dist/aframe-proxy-controls.min.js"></script>
-      <!--<script src="components/aframe-proxy-controls.min.js"></script>-->
       <script src="components/aframe-gamepad-controls.min.js"></script>
-      <!--<script src="https://rawgit.com/donmccurdy/aframe-gamepad-controls/master/dist/aframe-gamepad-controls.min.js"></script>-->
 
-    <!--audioanalyser-->
-      <!--<script src="components/build.js"></script>-->
-      <!--<script src="https://unpkg.com/aframe-audioanalyser-component@3.0.0/dist/aframe-audioanalyser-component.min.js"></script>-->
-      <!--<script src="xhrTest.js"></script>-->
-      <!--<script src="components/aframe-audioanalyser-component.js"></script>-->
-      <!--<script src="components/aframe-entity-generator-component.js"></script>-->
-      <!--<script src="components/scale-y-color.js"></script>-->
+    <!--animation-->
+      <script src="https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js"></script>
 
       <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script src="components/main.js" type="text/javascript" charset="utf-8"></script>
@@ -34,7 +26,7 @@
   </head>
   <body>
     <a-scene proxy-controls
-    >
+              fog="type: linear; color: #AAB; far: 30; near: 0">
       <a-assets>
         <a-mixin id="bar"
           geometry="primitive: box"
@@ -52,10 +44,9 @@
         rotation="0 180 0"
       ></a-entity>
 
-      <a-light type="ambient" color="#222"></a-light>
-      <a-light type="point" position="0 1 0" intensity="2"></a-light>
-      <a-circle color="#333" opacity="0.8" rotation="-90 0 0" radius="12"
-        roughness="1"></a-circle>
+      <!--<a-light type="ambient" color="#222"></a-light>-->
+      <!--<a-light type="point" position="0 1 0" intensity="2"></a-light>-->
+      <a-circle color="#333" opacity="0.8" rotation="-90 0 0" radius="120" roughness="1"></a-circle>
       <a-sky color="#222"></a-sky>
 
       <a-entity camera
@@ -67,9 +58,28 @@
         </a-cursor>
       </a-entity>
       
-      <a-box      soundjs="soundjsID: castle; soundjsSrc: castle.mp3" position ="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-      <a-sphere   soundjs="soundjsID: spine; soundjsSrc: spine.mp3" position ="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-      <a-cylinder soundjs="soundjsID: tomes; soundjsSrc: tomes.mp3" position ="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+      <a-box
+          soundjs="id: castle; src: castle_guitar.mp3"
+          position ="-1 0.5 -3"
+          rotation="0 45 0"
+          color="#4CC3D9"
+          animation__scale="startEvents: gamepadA, gamepadRT; pauseEvents: gamepadB, soundDone; property: scale; dir: alternate; dur: 200; delay: 2000; easing: easeInSine; loop: true; to: 1.2 1 1.2"
+        ></a-box>
+      <a-sphere
+          soundjs="id: spine; src: castle_bass.mp3"
+          position ="0 1.25 -5"
+          radius="1.25"
+          color="#EF2D5E"
+          animation__scale="startEvents: gamepadA, gamepadRT; pauseEvents: gamepadB, soundDone; property: scale; dir: alternate; dur: 200; delay: 2000; easing: easeInSine; loop: true; to: 1.2 1 1.2"
+      ></a-sphere>
+      <a-cylinder
+          soundjs="id: tomes; src: castle_drums.mp3"
+          position ="1 0.75 -3"
+          radius="0.5"
+          height="1.5"
+          color="#FFC65D"
+          animation__scale="startEvents: gamepadA, gamepadRT; pauseEvents: gamepadB, soundDone; property: scale; dir: alternate; dur: 200; delay: 2000; easing: easeInSine; loop: true; to: 1.2 1 1.2"
+      ></a-cylinder>
 
       <!--<a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>-->
       <!--<a-sky color="#ECECEC"></a-sky>-->

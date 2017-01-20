@@ -4,10 +4,10 @@
 // Handle gamepad click functions
 //
 function gamepadListeners () {
-  $('#camera').on('gamepadbuttondown:0', function () {
+  $('a-scene').on('gamepadbuttondown:0', function () {
     var intersectedEl = cursor.components.cursor.intersectedEl
     var soundjs = intersectedEl.components['soundjs']
-    cursor.emit('gamepadA', { cursorTarget: intersectedEl,
+    intersectedEl.emit('gamepadA', { cursorTarget: intersectedEl,
                               buttonColor: 'green',
                               soundjs: soundjs
                               }, true)
@@ -17,7 +17,7 @@ function gamepadListeners () {
   $('#camera').on('gamepadbuttondown:7', function () {
     var intersectedEl = cursor.components.cursor.intersectedEl
     var soundjs = intersectedEl.components['soundjs']
-    cursor.emit('gamepadRT', { cursorTarget: intersectedEl,
+    intersectedEl.emit('gamepadRT', { cursorTarget: intersectedEl,
                               buttonColor: 'red',
                               soundjs: soundjs
                               }, true)
@@ -27,7 +27,7 @@ function gamepadListeners () {
   $('#camera').on('gamepadbuttondown:1', function () {
     var intersectedEl = cursor.components.cursor.intersectedEl
     var soundjs = intersectedEl.components['soundjs']
-    cursor.emit('gamepadB', { cursorTarget: intersectedEl,
+    intersectedEl.emit('gamepadB', { cursorTarget: intersectedEl,
                               buttonColor: 'blue',
                               soundjs: soundjs
                               }, true)
@@ -47,8 +47,9 @@ function setEventListeners () {
     var cursorTarget = e.detail.cursorTarget
     var buttonColor = e.detail.buttonColor
     var soundjs = e.detail.soundjs
+    //console.log(e)
     soundjs.soundjsPlay()
-    console.log (soundjs)
+    //console.log (soundjs)
     cursorTarget.setAttribute('material', 'color', buttonColor);
   })
 
@@ -68,6 +69,10 @@ function setEventListeners () {
     cursorTarget.setAttribute('material', 'color', buttonColor);
   })
 
+  document.querySelector('a-box').addEventListener('gamepadA', function(e){
+    console.log(e)
+  })
+
   function handleFileLoad(event) {
     console.log("Preloaded:", event.src);
     //console.log(event)
@@ -84,36 +89,35 @@ function setEventListeners () {
 //
 AFRAME.registerComponent('soundjs', {
   schema: {
-    soundjsID: {type: 'string'},
-    soundjsSrc: {type: 'string'},
+    id: {type: 'string'},
+    src: {type: 'string'},
+    //volume: {type: 'string'},
     soundjsInstance: {}
   },
   init: function() {
     var el = this.el
-    var soundID = this.data.soundjsID;
-    var soundSrc = this.data.soundjsSrc;
+    var soundID = this.data.id;
+    var soundSrc = this.data.src;
     createjs.Sound.registerSound(soundSrc, soundID);
     var myInstance = createjs.Sound.createInstance(soundID)
+    myInstance.on("complete", function(){
+      el.emit("soundDone")
+    })
     this.data.soundjsInstance = myInstance
     //el.setAttribute('audioanalyser', {src: myInstance});
   },
 
-  //update: function() {
-    //var data = this.data
-    //var soundID = this.data.soundjsID;
-    //var soundSrc = this.data.soundjsSrc;
-    ////var soundjsInstance = this.
-    //console.log(data)
-  //},
-
   soundjsPlay: function(){
-    createjs.Sound.play(this.data.soundjsID)
+    var myInstance = this.data.soundjsInstance
+    myInstance.play(this.data.id, {interrupt: createjs.Sound.INTERRUPT_ANY})
   },
   soundjsStop: function(){
-    createjs.Sound.stop(this.data.soundjsID)
+    this.data.soundjsInstance.stop()
   },
   soundjsLoop: function(){
-    createjs.Sound.play(this.data.soundjsID, {loop: -1});
+    this.data.soundjsInstance.stop()
+    var myInstance = createjs.Sound.play(this.data.id, {loop: -1})
+    this.data.soundjsInstance = myInstance
   }
 });
 
