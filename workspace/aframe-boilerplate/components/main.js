@@ -47,7 +47,12 @@ function setEventListeners () {
     var cursorTarget = e.detail.cursorTarget
     var buttonColor = e.detail.buttonColor
     var soundjs = e.detail.soundjs
-    soundjs.soundjsPlay()
+    //var soundjsSrc = 
+    //soundjs.soundjsPlay()
+    //console.log(cursorTarget.components.soundjs.data.soundjsSrc)
+    console.log (soundjs)
+    document.querySelector('#levels').setAttribute('audioanalyser', {src: soundjs.data.soundjsSrc})
+    soundjs.audioEl.play()
     cursorTarget.setAttribute('material', 'color', buttonColor);
    //console.log(e, e.detail)
   })
@@ -82,24 +87,70 @@ AFRAME.registerComponent('soundjs', {
     soundjsSrc: {type: 'string'}
   },
   init: function() {
+    var audioEl;
     var el = this.el
+    //console.log(el)
     var soundID = this.data.soundjsID;
     var soundSrc = this.data.soundjsSrc;
-    console.log(this)
+    //console.log(this)
     createjs.Sound.registerSound(soundSrc, soundID);
     createjs.Sound.addEventListener("fileload", handleFileLoad);
+    var myInstance = createjs.Sound.createInstance(soundID)
+    var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    var source;
+
+     function getData() {
+      source = audioCtx.createBufferSource();
+      //console.log(audioCtx)
+      //debugger
+      request = new XMLHttpRequest();
+      request.open('GET', './castle.mp3', true);
+      request.responseType = 'arraybuffer';
+      request.onload = function() {
+        console.log(request.response)
+        var audioData = request.response;
+        audioCtx.decodeAudioData(audioData, function(buffer) {
+            //console.log(audioData)
+            myBuffer = buffer;
+            songLength = buffer.duration;
+            source.buffer = myBuffer;
+            myInstance.sourceNode = source.buffer
+            //source.playbackRate.value = playbackControl.value;
+            source.connect(audioCtx.destination);
+            //source.connect(analyser)
+            console.log(source)
+            el.emit('didAThing', {source: source,
+                                  src: soundID,
+                                  context: audioCtx}, true)
+          },
+          function(e){"Error with decoding audio data" + e.err});
+      }
+      request.send();
+    }
+
     function handleFileLoad(event) {
+      //audioEl.src = soundSrc
+      getData();
       console.log("Preloaded:", event.src);
     }
+      //myInstance.sourceNode = soundSrc
+      //console.log(myInstance.sourceNode)
+      //console.log(myInstance)
+      //audioEl = this.audioEl = document.createElement('audio');
+      //audioEl.crossOrigin = 'anonymous';
+      //audioEl.autoplay = true;
+      //audioEl.id = 'soundjsAudio';
+      //el.appendChild(audioEl);
+      el.setAttribute('audioanalyser', {src: myInstance});
   },
   soundjsPlay: function(){
-    var myInstance = createjs.Sound.play(this.data.soundjsID)
+    createjs.Sound.play(this.data.soundjsID)
   },
   soundjsStop: function(){
     createjs.Sound.stop(this.data.soundjsID)
   },
   soundjsLoop: function(){
-    var myInstance = createjs.Sound.play(this.data.soundjsID, {loop: -1});
+    createjs.Sound.play(this.data.soundjsID, {loop: -1});
   }
 });
 

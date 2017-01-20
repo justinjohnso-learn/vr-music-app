@@ -6,6 +6,9 @@
     <meta name="description" content="Hello, World! - A-Frame">
     <meta name="apple-mobile-web-app-capable" content="yes">
 
+    <!--soundjs-->
+      <script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script>
+
     <!--aframe base-->
       <script src="https://aframe.io/releases/0.4.0/aframe.min.js"></script>
       <!--<script src="https://aframe.io/releases/0.3.2/aframe.min.js"></script>-->
@@ -16,14 +19,12 @@
       <!--<script src="https://rawgit.com/donmccurdy/aframe-gamepad-controls/master/dist/aframe-gamepad-controls.min.js"></script>-->
 
     <!--audioanalyser-->
-      <script src="components/build.js"></script>
-      <script src="https://unpkg.com/aframe-audioanalyser-component@3.0.0/dist/aframe-audioanalyser-component.min.js"></script>
-      <!--<script src="components/aframe-audioanalyser-component.js"></script>-->
+      <!--<script src="components/build.js"></script>-->
+      <!--<script src="https://unpkg.com/aframe-audioanalyser-component@3.0.0/dist/aframe-audioanalyser-component.min.js"></script>-->
+      <!--<script src="xhrTest.js"></script>-->
+      <script src="components/aframe-audioanalyser-component.js"></script>
       <!--<script src="components/aframe-entity-generator-component.js"></script>-->
-      <script src="components/scale-y-color.js"></script>
-
-    <!--soundjs-->
-      <script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script>
+      <!--<script src="components/scale-y-color.js"></script>-->
 
       <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script src="components/main.js" type="text/javascript" charset="utf-8"></script>
@@ -42,7 +43,7 @@
       </a-assets>
 
       <a-entity
-        audioanalyser="src: #song; smoothingTimeConstant: 0.9"
+        id="levels"
         audioanalyser-levels-scale="max: 50; multiplier: 0.04"
         entity-generator="mixin: bar; num: 256"
         layout="type: circle; radius: 10"
@@ -65,8 +66,8 @@
       </a-entity>
       
       <a-box      soundjs="soundjsID: castle; soundjsSrc: castle.mp3" position ="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-      <a-sphere   soundjs="soundjsID: spine; soundjsSrc: spine.mp3" position ="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-      <a-cylinder soundjs="soundjsID: tomes; soundjsSrc: tomes.mp3" position ="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+      <!--<a-sphere   soundjs="soundjsID: spine; soundjsSrc: spine.mp3" position ="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>-->
+      <!--<a-cylinder soundjs="soundjsID: tomes; soundjsSrc: tomes.mp3" position ="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>-->
 
       <!--<a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>-->
       <!--<a-sky color="#ECECEC"></a-sky>-->
