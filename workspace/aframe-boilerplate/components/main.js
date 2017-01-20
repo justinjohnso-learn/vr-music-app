@@ -48,12 +48,8 @@ function setEventListeners () {
     var buttonColor = e.detail.buttonColor
     var soundjs = e.detail.soundjs
     soundjs.soundjsPlay()
-    //console.log(cursorTarget.components.soundjs.data.soundjsSrc)
     console.log (soundjs)
-    //document.querySelector('#levels').setAttribute('audioanalyser', {src: soundjs.data.soundjsSrc})
-    //soundjs.audioEl.play()
     cursorTarget.setAttribute('material', 'color', buttonColor);
-   //console.log(e, e.detail)
   })
 
   scene.addEventListener('gamepadRT', function(e){
@@ -62,7 +58,6 @@ function setEventListeners () {
     var soundjs = e.detail.soundjs
     soundjs.soundjsLoop()
     cursorTarget.setAttribute('material', 'color', buttonColor);
-    //console.log(e, e.detail)
   })
 
   scene.addEventListener('gamepadB', function(e){
@@ -71,10 +66,16 @@ function setEventListeners () {
     var soundjs = e.detail.soundjs
     soundjs.soundjsStop()
     cursorTarget.setAttribute('material', 'color', buttonColor);
-    //console.log(e, e.detail)
   })
 
+  function handleFileLoad(event) {
+    console.log("Preloaded:", event.src);
+    //console.log(event)
+  }
+  createjs.Sound.addEventListener("fileload", handleFileLoad);
+
   gamepadListeners();
+
   console.log("event listeners set!")
 }
 
@@ -84,61 +85,26 @@ function setEventListeners () {
 AFRAME.registerComponent('soundjs', {
   schema: {
     soundjsID: {type: 'string'},
-    soundjsSrc: {type: 'string'}
+    soundjsSrc: {type: 'string'},
+    soundjsInstance: {}
   },
   init: function() {
-    //var audioEl;
     var el = this.el
+    var soundID = this.data.soundjsID;
+    var soundSrc = this.data.soundjsSrc;
+    createjs.Sound.registerSound(soundSrc, soundID);
+    var myInstance = createjs.Sound.createInstance(soundID)
+    this.data.soundjsInstance = myInstance
+    //el.setAttribute('audioanalyser', {src: myInstance});
+  },
+
+  //update: function() {
+    //var data = this.data
     //var soundID = this.data.soundjsID;
     //var soundSrc = this.data.soundjsSrc;
-    //var source = audioCtx.createBufferSource();
-    createjs.Sound.registerSound(soundSrc, soundID);
-    createjs.Sound.addEventListener("fileload", handleFileLoad);
-    var myInstance = createjs.Sound.createInstance(soundID)
-    //var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-    //function getData(myInstance, el, soundID, soundSrc) {
-      //request = new XMLHttpRequest();
-      //request.open('GET', soundSrc, true);
-      //request.responseType = 'arraybuffer';
-      //request.onload = function() {
-        //console.log(request.response)
-        //var audioData = request.response;
-        //audioCtx.decodeAudioData(audioData, function(buffer) {
-            ////console.log(audioData)
-            //myBuffer = buffer;
-            //songLength = buffer.duration;
-            //source.buffer = myBuffer;
-            //myInstance.sourceNode = source.buffer
-            ////source.playbackRate.value = playbackControl.value;
-            //source.connect(audioCtx.destination);
-            ////source.connect(analyser)
-            //console.log(source)
-            //el.emit('didAThing', {source: source,
-                                  //src: soundID,
-                                  //context: audioCtx}, true)
-          //},
-          //function(e){"Error with decoding audio data" + e.err});
-      //}
-      //request.send();
-    //}
-
-
-    function handleFileLoad(event) {
-      //getData(myInstance, el, soundID, soundSrc);
-      //audioEl.src = soundSrc
-      console.log("Preloaded:", event.src);
-    }
-      //myInstance.sourceNode = soundSrc
-      //console.log(myInstance.sourceNode)
-      //console.log(myInstance)
-      //audioEl = this.audioEl = document.createElement('audio');
-      //audioEl.crossOrigin = 'anonymous';
-      //audioEl.autoplay = true;
-      //audioEl.id = 'soundjsAudio';
-      //el.appendChild(audioEl);
-      el.setAttribute('audioanalyser', {src: myInstance});
-  },
+    ////var soundjsInstance = this.
+    //console.log(data)
+  //},
 
   soundjsPlay: function(){
     createjs.Sound.play(this.data.soundjsID)
