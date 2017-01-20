@@ -87,11 +87,11 @@ AFRAME.registerComponent('soundjs', {
     soundjsSrc: {type: 'string'}
   },
   init: function() {
-    var audioEl;
+    //var audioEl;
     var el = this.el
-    var soundID = this.data.soundjsID;
-    var soundSrc = this.data.soundjsSrc;
-    var source = audioCtx.createBufferSource();
+    //var soundID = this.data.soundjsID;
+    //var soundSrc = this.data.soundjsSrc;
+    //var source = audioCtx.createBufferSource();
     createjs.Sound.registerSound(soundSrc, soundID);
     createjs.Sound.addEventListener("fileload", handleFileLoad);
     var myInstance = createjs.Sound.createInstance(soundID)
