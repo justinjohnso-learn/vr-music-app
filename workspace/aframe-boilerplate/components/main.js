@@ -45,33 +45,34 @@ function setEventListeners () {
 
   scene.addEventListener('gamepadA', function(e){
     var cursorTarget = e.detail.cursorTarget
-    var buttonColor = e.detail.buttonColor
     var soundjs = e.detail.soundjs
     //console.log(e)
     soundjs.soundjsPlay()
     //console.log (soundjs)
     //cursorTarget.setAttribute('material', 'color', buttonColor);
-    //cursorTarget.setAttribute('animation_color', {property: 'color'; dir: 'alternate'; dur: 1000; easing: 'easeInSine'; loop: true; to: '#0F0'})
+    cursorTarget.removeAttribute('animation', {property: 'color', dir: 'alternate', dur: 1000, easing: 'easeInSine', loop: true, to: '#F00'})
+    cursorTarget.setAttribute('animation', {property: 'color', dir: 'alternate', dur: 1000, easing: 'easeInSine', loop: true, to: '#0F0'})
   })
 
   scene.addEventListener('gamepadRT', function(e){
     var cursorTarget = e.detail.cursorTarget
-    var buttonColor = e.detail.buttonColor
     var soundjs = e.detail.soundjs
     soundjs.soundjsLoop()
     //cursorTarget.setAttribute('material', 'color', buttonColor);
+    cursorTarget.removeAttribute('animation', {property: 'color', dir: 'alternate', dur: 1000, easing: 'easeInSine', loop: true, to: '#0F0'})
+    cursorTarget.setAttribute('animation', {property: 'color', dir: 'alternate', dur: 1000, easing: 'easeInSine', loop: true, to: '#F00'})
   })
 
   scene.addEventListener('gamepadB', function(e){
     var cursorTarget = e.detail.cursorTarget
-    var buttonColor = e.detail.buttonColor
+    //var targetColor = cursorTarget.components.material.data.color
     var soundjs = e.detail.soundjs
     soundjs.soundjsStop()
-    //cursorTarget.setAttribute('material', 'color', buttonColor);
-  })
-
-  document.querySelector('a-box').addEventListener('gamepadA', function(e){
-    console.log(e)
+    cursorTarget.removeAttribute('animation', {property: 'color', dir: 'alternate', dur: 1000, easing: 'easeInSine', loop: true, to: '#0F0'})
+    cursorTarget.removeAttribute('animation', {property: 'color', dir: 'alternate', dur: 1000, easing: 'easeInSine', loop: true, to: '#F00'})
+    cursorTarget.setAttribute('material', 'color', '#6060FF');
+    //console.log(targetColor)
+    //cursorTarget.setAttribute('animation', {property: 'color', dur: 0, to: targetColor})
   })
 
   function handleFileLoad(event) {
