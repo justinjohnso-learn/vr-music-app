@@ -50,7 +50,8 @@ function setEventListeners () {
     //console.log(e)
     soundjs.soundjsPlay()
     //console.log (soundjs)
-    cursorTarget.setAttribute('material', 'color', buttonColor);
+    //cursorTarget.setAttribute('material', 'color', buttonColor);
+    //cursorTarget.setAttribute('animation_color', {property: 'color'; dir: 'alternate'; dur: 1000; easing: 'easeInSine'; loop: true; to: '#0F0'})
   })
 
   scene.addEventListener('gamepadRT', function(e){
@@ -58,7 +59,7 @@ function setEventListeners () {
     var buttonColor = e.detail.buttonColor
     var soundjs = e.detail.soundjs
     soundjs.soundjsLoop()
-    cursorTarget.setAttribute('material', 'color', buttonColor);
+    //cursorTarget.setAttribute('material', 'color', buttonColor);
   })
 
   scene.addEventListener('gamepadB', function(e){
@@ -66,7 +67,7 @@ function setEventListeners () {
     var buttonColor = e.detail.buttonColor
     var soundjs = e.detail.soundjs
     soundjs.soundjsStop()
-    cursorTarget.setAttribute('material', 'color', buttonColor);
+    //cursorTarget.setAttribute('material', 'color', buttonColor);
   })
 
   document.querySelector('a-box').addEventListener('gamepadA', function(e){

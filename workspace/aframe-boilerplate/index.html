@@ -25,17 +25,8 @@
 
   </head>
   <body>
+              <!--fog="type: linear; color: #AAB; far: 30; near: 0">-->
     <a-scene proxy-controls
-              fog="type: linear; color: #AAB; far: 30; near: 0">
-      <a-assets>
-        <a-mixin id="bar"
-          geometry="primitive: box"
-          material="color: black"
-          scale-y-color="from: 10 5 10; to: 180 255 180; maxScale: 15"
-        ></a-mixin>
-        <!--<audio id="song" autoplay loop src="castle.mp3"></audio>-->
-      </a-assets>
-
       <a-entity
         id="levels"
         audioanalyser-levels-scale="max: 50; multiplier: 0.04"
@@ -46,40 +37,36 @@
 
       <!--<a-light type="ambient" color="#222"></a-light>-->
       <!--<a-light type="point" position="0 1 0" intensity="2"></a-light>-->
-      <a-circle color="#333" opacity="0.8" rotation="-90 0 0" radius="120" roughness="1"></a-circle>
+      <a-circle color="#333" opacity="0.8" position="0 -.5 0" rotation="-90 0 0" radius="120" roughness="1"></a-circle>
       <a-sky color="#222"></a-sky>
 
       <a-entity camera
                 position="0 2 3"
                 look-controls
-                gamepad-controls="flyEnabled: true"
+                gamepad-controls
                 id="camera">
         <a-cursor id="cursor">
         </a-cursor>
       </a-entity>
       
-      <a-box
-          soundjs="id: castle; src: castle_guitar.mp3"
-          position ="-1 0.5 -3"
-          rotation="0 45 0"
-          color="#4CC3D9"
-          animation__scale="startEvents: gamepadA, gamepadRT; pauseEvents: gamepadB, soundDone; property: scale; dir: alternate; dur: 200; delay: 2000; easing: easeInSine; loop: true; to: 1.2 1 1.2"
-        ></a-box>
-      <a-sphere
-          soundjs="id: spine; src: castle_bass.mp3"
-          position ="0 1.25 -5"
-          radius="1.25"
-          color="#EF2D5E"
-          animation__scale="startEvents: gamepadA, gamepadRT; pauseEvents: gamepadB, soundDone; property: scale; dir: alternate; dur: 200; delay: 2000; easing: easeInSine; loop: true; to: 1.2 1 1.2"
-      ></a-sphere>
-      <a-cylinder
-          soundjs="id: tomes; src: castle_drums.mp3"
-          position ="1 0.75 -3"
-          radius="0.5"
-          height="1.5"
-          color="#FFC65D"
-          animation__scale="startEvents: gamepadA, gamepadRT; pauseEvents: gamepadB, soundDone; property: scale; dir: alternate; dur: 200; delay: 2000; easing: easeInSine; loop: true; to: 1.2 1 1.2"
-      ></a-cylinder>
+      <a-box soundjs="id: castle; src: castle.mp3" position ="-6.72 .5 -1.08" rotation="0 45 0" color="#4CC3D9" animation__scale="startEvents: gamepadA, gamepadRT; pauseEvents: gamepadB, soundDone; property: scale; dir: alternate; dur: 200; delay: 2000; easing: easeInSine; loop: true; to: 1.2 1.2 1.2"></a-box>
+      <a-box soundjs="id: castle; src: castle.mp3" position ="-5.46 .5 -2.37" rotation="0 45 0" color="#4CC3D9" animation__scale="startEvents: gamepadA, gamepadRT; pauseEvents: gamepadB, soundDone; property: scale; dir: alternate; dur: 200; delay: 2000; easing: easeInSine; loop: true; to: 1.2 1.2 1.2"></a-box>
+      <a-box soundjs="id: castle; src: castle.mp3" position ="-4.24 .5 -3.8" rotation="0 45 0" color="#4CC3D9" animation__scale="startEvents: gamepadA, gamepadRT; pauseEvents: gamepadB, soundDone; property: scale; dir: alternate; dur: 200; delay: 2000; easing: easeInSine; loop: true; to: 1.2 1.2 1.2"></a-box>
+      <a-box soundjs="id: castle; src: castle.mp3" position ="-4.86 1.97 -3.17" rotation="0 45 0" color="#4CC3D9" animation__scale="startEvents: gamepadA, gamepadRT; pauseEvents: gamepadB, soundDone; property: scale; dir: alternate; dur: 200; delay: 2000; easing: easeInSine; loop: true; to: 1.2 1.2 1.2"></a-box>
+      <a-box soundjs="id: castle; src: castle.mp3" position ="-6.06 1.97 -1.95" rotation="0 45 0" color="#4CC3D9" animation__scale="startEvents: gamepadA, gamepadRT; pauseEvents: gamepadB, soundDone; property: scale; dir: alternate; dur: 200; delay: 2000; easing: easeInSine; loop: true; to: 1.2 1.2 1.2"></a-box>
+
+      <a-sphere soundjs="id: spine; src: spine.mp3" position ="-2 .7 -5" scale = ".6 .6 .6" radius="1.25" color="#EF2D5E" animation__scale="startEvents: gamepadA, gamepadRT; pauseEvents: gamepadB, soundDone; property: scale; dir: alternate; dur: 200; delay: 2000; easing: easeInSine; loop: true; to: .7 .7 .7"></a-sphere>
+      <a-sphere soundjs="id: spine; src: spine.mp3" position ="0 .7 -5" scale = ".6 .6 .6" radius="1.25" color="#EF2D5E" animation__scale="startEvents: gamepadA, gamepadRT; pauseEvents: gamepadB, soundDone; property: scale; dir: alternate; dur: 200; delay: 2000; easing: easeInSine; loop: true; to: .7 .7 .7"></a-sphere>
+      <a-sphere soundjs="id: spine; src: spine.mp3" position ="2 .7 -5" scale = ".6 .6 .6" radius="1.25" color="#EF2D5E" animation__scale="startEvents: gamepadA, gamepadRT; pauseEvents: gamepadB, soundDone; property: scale; dir: alternate; dur: 200; delay: 2000; easing: easeInSine; loop: true; to: .7 .7 .7"></a-sphere>
+      <a-sphere soundjs="id: spine; src: spine.mp3" position ="-1 2.13 -5" scale = ".6 .6 .6" radius="1.25" color="#EF2D5E" animation__scale="startEvents: gamepadA, gamepadRT; pauseEvents: gamepadB, soundDone; property: scale; dir: alternate; dur: 200; delay: 2000; easing: easeInSine; loop: true; to: .7 .7 .7"></a-sphere>
+      <a-sphere soundjs="id: spine; src: spine.mp3" position ="1 2.13 -5" scale = ".6 .6 .6" radius="1.25" color="#EF2D5E" animation__scale="startEvents: gamepadA, gamepadRT; pauseEvents: gamepadB, soundDone; property: scale; dir: alternate; dur: 200; delay: 2000; easing: easeInSine; loop: true; to: .7 .7 .7"></a-sphere>
+      <a-sphere soundjs="id: spine; src: spine.mp3" position ="-2 3.5 -5" scale = ".6 .6 .6" radius="1.25" color="#EF2D5E" animation__scale="startEvents: gamepadA, gamepadRT; pauseEvents: gamepadB, soundDone; property: scale; dir: alternate; dur: 200; delay: 2000; easing: easeInSine; loop: true; to: .7 .7 .7"></a-sphere>
+      <a-sphere soundjs="id: spine; src: spine.mp3" position ="0 3.5 -5" scale = ".6 .6 .6" radius="1.25" color="#EF2D5E" animation__scale="startEvents: gamepadA, gamepadRT; pauseEvents: gamepadB, soundDone; property: scale; dir: alternate; dur: 200; delay: 2000; easing: easeInSine; loop: true; to: .7 .7 .7"></a-sphere>
+      <a-sphere soundjs="id: spine; src: spine.mp3" position ="2 3.5 -5" scale = ".6 .6 .6" radius="1.25" color="#EF2D5E" animation__scale="startEvents: gamepadA, gamepadRT; pauseEvents: gamepadB, soundDone; property: scale; dir: alternate; dur: 200; delay: 2000; easing: easeInSine; loop: true; to: .7 .7 .7"></a-sphere>
+
+      <a-cylinder soundjs="id: tomes; src: tomes.mp3" position ="3.96 0.77 -3.89" radius="0.5" height="1.5" color="#FFC65D" animation__scale="startEvents: gamepadA, gamepadRT; pauseEvents: gamepadB, soundDone; property: scale; dir: alternate; dur: 200; delay: 2000; easing: easeInSine; loop: true; to: 1.2 1.2 1.2"></a-cylinder>
+      <a-cylinder soundjs="id: tomes; src: tomes.mp3" position ="5.22 1.25 -2.79" radius="0.5" height="2.5" color="#FFC65D" animation__scale="startEvents: gamepadA, gamepadRT; pauseEvents: gamepadB, soundDone; property: scale; dir: alternate; dur: 200; delay: 2000; easing: easeInSine; loop: true; to: 1.2 1.2 1.2"></a-cylinder>
+      <a-cylinder soundjs="id: tomes; src: tomes.mp3" position ="6.27 1.78 -1.43" radius="0.5" height="3.5" color="#FFC65D" animation__scale="startEvents: gamepadA, gamepadRT; pauseEvents: gamepadB, soundDone; property: scale; dir: alternate; dur: 200; delay: 2000; easing: easeInSine; loop: true; to: 1.2 1.2 1.2"></a-cylinder>
 
       <!--<a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>-->
       <!--<a-sky color="#ECECEC"></a-sky>-->
