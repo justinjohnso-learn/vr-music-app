@@ -108,7 +108,9 @@ function setEventListeners () {
 
 function soundjsStopAll(){
   createjs.Sound.stop()
-  document.querySelectorAll('[soundjs]').forEach(function(object){
+  var allObjects = document.querySelectorAll('[soundjs]')
+  var objArr = Array.from(allObjects)
+  objArr.forEach(function(object){
     object.emit("soundDone")
   })
 }
