@@ -4,7 +4,7 @@
 // Handle gamepad click functions
 //
 function gamepadListeners () {
-  $('#camera').on('gamepadbuttondown:0', function () {
+  $('#camera').on('gamepadbuttondown:0 keydown:KeyE', function () {
     var intersectedEl = cursor.components.cursor.intersectedEl
     var soundjs = intersectedEl.components['soundjs']
     intersectedEl.emit('gamepadA', { cursorTarget: intersectedEl,
@@ -13,14 +13,14 @@ function gamepadListeners () {
     console.log("A")
   });
 
-  $('#camera').on('gamepadbuttondown:6', function () {
+  $('#camera').on('gamepadbuttondown:6 keydown:Escape', function () {
     //var intersectedEl = cursor.components.cursor.intersectedEl
     //var soundjs = intersectedEl.components['soundjs']
     document.querySelector('a-scene').emit('gamepadLT', true)
     console.log("LT")
   });
 
-  $('#camera').on('gamepadbuttondown:7', function () {
+  $('#camera').on('gamepadbuttondown:7 keydown:KeyQ', function () {
     var intersectedEl = cursor.components.cursor.intersectedEl
     var soundjs = intersectedEl.components['soundjs']
     intersectedEl.emit('gamepadRT', { cursorTarget: intersectedEl,
@@ -29,7 +29,7 @@ function gamepadListeners () {
     console.log("RT")
   });
 
-  $('#camera').on('gamepadbuttondown:1', function () {
+  $('#camera').on('gamepadbuttondown:1 keydown:KeyR', function () {
     var intersectedEl = cursor.components.cursor.intersectedEl
     var soundjs = intersectedEl.components['soundjs']
     intersectedEl.emit('gamepadB', { cursorTarget: intersectedEl,
@@ -38,7 +38,7 @@ function gamepadListeners () {
     console.log("B")
   });
   
-  $('#camera').on('gamepadbuttondown:3', function () {
+  $('#camera').on('gamepadbuttondown:3 keydown:KeyT', function () {
     var intersectedEl = cursor.components.cursor.intersectedEl
     var soundjs = intersectedEl.components['soundjs']
     intersectedEl.emit('gamepadY', { cursorTarget: intersectedEl,

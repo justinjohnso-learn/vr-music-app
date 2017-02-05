@@ -13,8 +13,9 @@
     <!--aframe base-->
       <script src="https://aframe.io/releases/0.4.0/aframe.min.js"></script>
 
-    <!--proxy-controls, gamepad-controls-->
+    <!--proxy-controls, gamepad-controls, keyboard-controls-->
       <script src="https://rawgit.com/donmccurdy/aframe-proxy-controls/master/dist/aframe-proxy-controls.min.js"></script>
+      <script src="https://rawgit.com/donmccurdy/aframe-keyboard-controls/master/dist/aframe-keyboard-controls.min.js"></script>
       <script src="components/aframe-gamepad-controls.min.js"></script>
 
     <!--animation-->
@@ -28,7 +29,8 @@
 
   </head>
   <body>
-    <a-scene proxy-controls
+    <a-scene 
+        proxy-controls="pairCode: vr-music"
         fog="type: linear; color: #AAB; far: 30; near: 0">
       <a-entity
         id="levels"
@@ -46,7 +48,8 @@
       <a-entity camera
                 position="0 2 10"
                 look-controls
-                gamepad-controls
+                gamepad-controls="acceleration: 200"
+                keyboard-controls="acceleration: 200"
                 id="camera">
         <a-cursor id="cursor">
         </a-cursor>
