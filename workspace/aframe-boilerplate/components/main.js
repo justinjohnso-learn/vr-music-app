@@ -144,12 +144,10 @@ AFRAME.registerComponent('soundjs', {
     var myInstance = createjs.Sound.createInstance(soundID)
     myInstance.volume = volume
     myInstance.duration = duration
-    //myInstance.on("complete", function(){
-      //el.emit("soundDone")
-      //console.log("complete")
-    //})
     this.data.soundjsInstance = myInstance
     //el.setAttribute('audioanalyser', {src: myInstance});
+    debugger
+    //el.setObject3D
   },
 
   soundjsPlay: function(el){
