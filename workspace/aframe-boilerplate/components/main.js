@@ -130,38 +130,38 @@ AFRAME.registerComponent('soundjs', {
   schema: {
     id: {type: 'string'},
     src: {type: 'string'},
-    //volume: {type: 'string'},
+    volume: {type: 'float', default: 1},
+    duration: {type: 'int'},
     soundjsInstance: {}
   },
   init: function() {
     var el = this.el
     var soundID = this.data.id;
     var soundSrc = this.data.src;
+    var volume = this.data.volume;
+    var duration = this.data.duration;
     createjs.Sound.registerSound(soundSrc, soundID);
     var myInstance = createjs.Sound.createInstance(soundID)
-    myInstance.on("complete", function(){
-      el.emit("soundDone")
-      console.log("complete")
-    })
+    myInstance.volume = volume
+    myInstance.duration = duration
+    //myInstance.on("complete", function(){
+      //el.emit("soundDone")
+      //console.log("complete")
+    //})
     this.data.soundjsInstance = myInstance
     //el.setAttribute('audioanalyser', {src: myInstance});
   },
 
   soundjsPlay: function(el){
-    var myInstance = this.data.soundjsInstance
-    myInstance.loop = 0
+    this.data.soundjsInstance.stop()
+    var volume = this.data.volume
+    var duration = this.data.duration
+    var myInstance = createjs.Sound.play(this.data.id, {volume: volume, duration: duration})
+    this.data.soundjsInstance = myInstance
     myInstance.on("complete", function(){
       el.emit("soundDone")
       console.log("complete")
     })
-    myInstance.play(this.data.id, {interrupt: createjs.Sound.INTERRUPT_ANY})
-    this.data.soundjsInstance = myInstance
-    if (this.el.localName !== 'a-cylinder'){
-      myInstance.duration = 7100
-    };
-    if (this.el.id === "note"){
-      myInstance.duration = 444
-    };
   },
   soundjsStop: function(){
     this.data.soundjsInstance.stop()
@@ -171,14 +171,11 @@ AFRAME.registerComponent('soundjs', {
     myInstance.paused = true
   },
   soundjsLoop: function(){
+    //console.log(this.data.duration)
     this.data.soundjsInstance.stop()
-    var myInstance = createjs.Sound.play(this.data.id, {loop: -1})
-    if (this.el.localName !== 'a-cylinder'){
-      myInstance.duration = 7100
-    };
-    if (this.el.id === "note"){
-      myInstance.duration = 444
-    };
+    var volume = this.data.volume
+    var duration = this.data.duration
+    var myInstance = createjs.Sound.play(this.data.id, {loop: -1, volume: volume, duration: duration})
     this.data.soundjsInstance = myInstance
   }
 });
