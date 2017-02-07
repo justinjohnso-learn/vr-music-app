@@ -146,7 +146,7 @@ AFRAME.registerComponent('soundjs', {
     myInstance.duration = duration
     this.data.soundjsInstance = myInstance
     //el.setAttribute('audioanalyser', {src: myInstance});
-    debugger
+    //debugger
     //el.setObject3D
   },
 
