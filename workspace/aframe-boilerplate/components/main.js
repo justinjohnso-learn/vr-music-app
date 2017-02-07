@@ -10,14 +10,14 @@ function gamepadListeners () {
     intersectedEl.emit('gamepadA', { cursorTarget: intersectedEl,
                               soundjs: soundjs
                               }, true)
-    console.log("A")
+    console.log("Play")
   });
 
   $('#camera').on('gamepadbuttondown:6 keydown:Escape', function () {
     //var intersectedEl = cursor.components.cursor.intersectedEl
     //var soundjs = intersectedEl.components['soundjs']
     document.querySelector('a-scene').emit('gamepadLT', true)
-    console.log("LT")
+    console.log("Stop All")
   });
 
   $('#camera').on('gamepadbuttondown:7 keydown:KeyQ', function () {
@@ -26,7 +26,7 @@ function gamepadListeners () {
     intersectedEl.emit('gamepadRT', { cursorTarget: intersectedEl,
                               soundjs: soundjs
                               }, true)
-    console.log("RT")
+    console.log("Loop")
   });
 
   $('#camera').on('gamepadbuttondown:1 keydown:KeyR', function () {
@@ -35,7 +35,7 @@ function gamepadListeners () {
     intersectedEl.emit('gamepadB', { cursorTarget: intersectedEl,
                               soundjs: soundjs
                               }, true)
-    console.log("B")
+    console.log("Stop")
   });
   
   $('#camera').on('gamepadbuttondown:3 keydown:KeyT', function () {
@@ -44,7 +44,7 @@ function gamepadListeners () {
     intersectedEl.emit('gamepadY', { cursorTarget: intersectedEl,
                               soundjs: soundjs
                               }, true)
-    console.log("Y")
+    console.log("Pause")
   });
 }
 
@@ -102,6 +102,15 @@ function setEventListeners () {
   createjs.Sound.addEventListener("fileload", handleFileLoad);
 
   gamepadListeners();
+
+  //document.querySelector('#camera').addEventListener('gamepadbuttondown', function (e) {
+    //console.log('button "%d" has been pressed.', e.detail.index);
+  //});
+
+  document.querySelector('#camera').addEventListener('keyboardEvent', function (e) {
+    debugger
+    console.log('button "%d" has been pressed.', e.detail.index);
+  });
 
   console.log("event listeners set!")
 }
