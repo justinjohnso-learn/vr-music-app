@@ -13,13 +13,6 @@ function gamepadListeners () {
     console.log("Play")
   });
 
-  $('#camera').on('gamepadbuttondown:6 keydown:Escape', function () {
-    //var intersectedEl = cursor.components.cursor.intersectedEl
-    //var soundjs = intersectedEl.components['soundjs']
-    document.querySelector('a-scene').emit('gamepadLT', true)
-    console.log("Stop All")
-  });
-
   $('#camera').on('gamepadbuttondown:7 keydown:KeyQ', function () {
     var intersectedEl = cursor.components.cursor.intersectedEl
     var soundjs = intersectedEl.components['soundjs']
@@ -27,6 +20,15 @@ function gamepadListeners () {
                               soundjs: soundjs
                               }, true)
     console.log("Loop")
+  });
+  
+  $('#camera').on('gamepadbuttondown:3 keydown:KeyT', function () {
+    var intersectedEl = cursor.components.cursor.intersectedEl
+    var soundjs = intersectedEl.components['soundjs']
+    intersectedEl.emit('gamepadY', { cursorTarget: intersectedEl,
+                              soundjs: soundjs
+                              }, true)
+    console.log("Pause")
   });
 
   $('#camera').on('gamepadbuttondown:1 keydown:KeyR', function () {
@@ -37,14 +39,12 @@ function gamepadListeners () {
                               }, true)
     console.log("Stop")
   });
-  
-  $('#camera').on('gamepadbuttondown:3 keydown:KeyT', function () {
-    var intersectedEl = cursor.components.cursor.intersectedEl
-    var soundjs = intersectedEl.components['soundjs']
-    intersectedEl.emit('gamepadY', { cursorTarget: intersectedEl,
-                              soundjs: soundjs
-                              }, true)
-    console.log("Pause")
+
+  $('#camera').on('gamepadbuttondown:6 keydown:Escape', function () {
+    //var intersectedEl = cursor.components.cursor.intersectedEl
+    //var soundjs = intersectedEl.components['soundjs']
+    document.querySelector('a-scene').emit('gamepadLT', true)
+    console.log("Stop All")
   });
 }
 
