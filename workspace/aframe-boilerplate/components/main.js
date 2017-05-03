@@ -46,6 +46,10 @@ function gamepadListeners () {
     document.querySelector('a-scene').emit('gamepadLT', true)
     console.log("Stop All")
   });
+
+  $('#camera').on('touchstart', function () {
+
+  })
 }
 
 // Set event listeners
