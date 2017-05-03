@@ -48,7 +48,7 @@ function gamepadListeners () {
   });
 
   $('#camera').on('touchstart', function () {
-
+    console.log("Touch")
   })
 }
 
