@@ -7,11 +7,12 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
 
     <!--soundjs-->
-      <script src="https://code.createjs.com/preloadjs-0.6.2.min.js"></script>
-      <script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script>
+      <!-- <script src="https://code.createjs.com/preloadjs-0.6.2.min.js"></script>
+      <script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script> -->
+      <script src="https://code.createjs.com/1.0.0/soundjs.min.js"></script></head>
 
     <!--aframe base-->
-      <script src="https://aframe.io/releases/0.4.0/aframe.min.js"></script>
+      <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
 
     <!--proxy-controls, gamepad-controls, keyboard-controls-->
       <script src="https://rawgit.com/donmccurdy/aframe-proxy-controls/master/dist/aframe-proxy-controls.min.js"></script>
@@ -20,7 +21,7 @@
 
     <!--animation-->
       <script src="https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js"></script>
-      
+
     <!--bitmap text-->
       <script src="https://rawgit.com/bryik/aframe-bmfont-text-component/master/dist/aframe-bmfont-text-component.min.js"></script>
 
@@ -29,7 +30,7 @@
 
   </head>
   <body>
-    <a-scene 
+    <a-scene
         proxy-controls="pairCode: vr-music; debug: true; enableOverlay: false"
         fog="type: linear; color: #AAB; far: 30; near: 0">
       <a-entity
@@ -58,7 +59,7 @@
         <a-entity bmfont-text="text: Keyboard; color: #FFF; opacity:1" scale="5 5 5"position="-5.5 9.86 -5"></a-entity>
         <a-entity bmfont-text="text: Controller; color: #FFF; opacity:1" scale="5 5 5"position="-0.2 9.86 -5"></a-entity>
         <a-entity bmfont-text="text: Phone; color: #FFF; opacity:1" scale="5 5 5"position="6 9.86 -5"></a-entity>
-        
+
         <a-entity bmfont-text="text: Move; color: #FFF; opacity:1" scale="5 5 5"position="-11 8.76 -5"></a-entity>
         <a-entity bmfont-text="text: Play; color: #FFF; opacity:1" scale="5 5 5"position="-11 7.66 -5"></a-entity>
         <a-entity bmfont-text="text: Loop; color: #FFF; opacity:1" scale="5 5 5"position="-11 6.56 -5"></a-entity>
@@ -72,18 +73,18 @@
         <a-entity bmfont-text="text: T; color: #FFF; opacity:1" scale="5 5 5"position="-5.5 5.46 -5"></a-entity>
         <a-entity bmfont-text="text: R; color: #FFF; opacity:1" scale="5 5 5"position="-5.5 4.36 -5"></a-entity>
         <a-entity bmfont-text="text: ESC; color: #FFF; opacity:1" scale="5 5 5"position="-5.5 3.26 -5"></a-entity>
-      
+
         <a-entity bmfont-text="text: A; color: #FFF; opacity:1" scale="5 5 5"position="-0.2 8.76 -5"></a-entity>
         <a-entity bmfont-text="text: RT; color: #FFF; opacity:1" scale="5 5 5"position="-0.2 7.66 -5"></a-entity>
         <a-entity bmfont-text="text: LS; color: #FFF; opacity:1" scale="5 5 5"position="-0.2 6.56 -5"></a-entity>
         <a-entity bmfont-text="text: Y; color: #FFF; opacity:1" scale="5 5 5"position="-0.2 5.46 -5"></a-entity>
         <a-entity bmfont-text="text: B; color: #FFF; opacity:1" scale="5 5 5"position="-0.2 4.36 -5"></a-entity>
         <a-entity bmfont-text="text: LT; color: #FFF; opacity:1" scale="5 5 5"position="-0.2 3.26 -5"></a-entity>
-      
+
         <a-entity bmfont-text="text: Look & Tap; color: #FFF; opacity:1" scale="5 5 5"position="6 8.76 -5"></a-entity>
         <a-entity bmfont-text="text: Look & Tap; color: #FFF; opacity:1" scale="5 5 5"position="6 6.56 -5"></a-entity>
         <a-entity bmfont-text="text: Look & Tap; color: #FFF; opacity:1" scale="5 5 5"position="6 4.36 -5"></a-entity>
-      
+
       <a-box soundjs="id: castle_strum; src: audio/castle_strum.mp3; volume: .3; duration: 7100" position ="-6.72 .5 -1.08" rotation="0 45 0" color="#4CC3D9" animation__scale="startEvents: gamepadA, gamepadRT; pauseEvents: gamepadB, gamepadY, soundDone; property: scale; dir: alternate; dur: 200; delay: 2000; easing: easeInSine; loop: true; to: 1.2 1.2 1.2"></a-box>
       <a-box soundjs="id: castle_guitar; src: audio/castle_guitar.mp3; duration: 7100" position ="-5.46 .5 -2.37" rotation="0 45 0" color="#4CC3D9" animation__scale="startEvents: gamepadA, gamepadRT; pauseEvents: gamepadB, gamepadY, soundDone; property: scale; dir: alternate; dur: 200; delay: 2000; easing: easeInSine; loop: true; to: 1.2 1.2 1.2"></a-box>
       <a-box soundjs="id: castle_bass; src: audio/castle_bass.mp3; duration: 7100" position ="-4.24 .5 -3.8" rotation="0 45 0" color="#4CC3D9" animation__scale="startEvents: gamepadA, gamepadRT; pauseEvents: gamepadB, gamepadY, soundDone; property: scale; dir: alternate; dur: 200; delay: 2000; easing: easeInSine; loop: true; to: 1.2 1.2 1.2"></a-box>
